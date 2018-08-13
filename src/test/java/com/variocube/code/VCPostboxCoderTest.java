@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.variocube.code.impl.DictionaryCode;
+import com.variocube.code.impl.DictionaryCoder;
 import com.variocube.code.impl.RandomReedSolomonParityCoder;
 
 public class VCPostboxCoderTest {
@@ -76,7 +76,7 @@ public class VCPostboxCoderTest {
 		String validCode = "25KDPKCC";
 		String invalidCode = "2ZKDPKCC";
 		
-		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 1));
+		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCoder(), new RandomReedSolomonParityCoder(3, 1, 1));
 		String[] candidates = coder.reconstructionCandidates(invalidCode);
 		int matching = 0;
 		for(String c : candidates) {
@@ -95,7 +95,7 @@ public class VCPostboxCoderTest {
 		String validCode = "E3CR6CKK";
 		String invalidCode = "E3CR7CKK";
 		
-		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(2, 2, 1));
+		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCoder(), new RandomReedSolomonParityCoder(2, 2, 1));
 		String[] candidates = coder.reconstructionCandidates(invalidCode);
 		int matching = 0;
 		for(String c : candidates) {
@@ -111,7 +111,7 @@ public class VCPostboxCoderTest {
 	
 	@Test
 	public void testIntermediateCode2() throws ParityCoderException {
-		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(2, 1, 2));
+		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCoder(), new RandomReedSolomonParityCoder(2, 1, 2));
 		String validCode = "D44E2HDKHL51";
 		String invalidCode = "D45E2HDKHL51";
 		

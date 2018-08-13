@@ -1,6 +1,8 @@
 package com.variocube.code;
 
-import com.variocube.code.impl.DictionaryCode;
+import java.util.regex.Pattern;
+
+import com.variocube.code.impl.DictionaryCoder;
 import com.variocube.code.impl.RandomReedSolomonParityCoder;
 
 /**
@@ -25,11 +27,11 @@ public class VCPostboxCoder {
 	}
 	
 	public static VCPostboxCoder createEightDigitCoder() {
-		return new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 1));
+		return new VCPostboxCoder(new DictionaryCoder(), new RandomReedSolomonParityCoder(3, 1, 1));
 	}
 	
 	public static VCPostboxCoder createSixteenDigitCoder() {
-		return new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 2));
+		return new VCPostboxCoder(new DictionaryCoder(), new RandomReedSolomonParityCoder(3, 1, 2));
 	}
 	
 	public static VCPostboxCoder createDefault() {
@@ -79,6 +81,13 @@ public class VCPostboxCoder {
 			}
 			return result;
 		}
+	}
+	
+	/**
+	 * @return a compiled Regex Pattern for detecting codes of this coder
+	 */
+	public Pattern detectionPattern() {
+		return Pattern.compile(this.binaryCoder.detectionPattern());
 	}
 	
 }

@@ -38,7 +38,7 @@ public class RandomReedSolomonParityTest {
 		assertTrue(coder.isParityCorrect(byteCodeRandom));
 		assertTrue(coder.isParityCorrect(byteCodeWithZeros));
 		
-		DictionaryCode dict = new DictionaryCode();
+		DictionaryCoder dict = new DictionaryCoder();
 		String encodedString = dict.encodeData(byteCodeRandom);
 		System.out.println(encodedString);
 		byte[] decodedData = dict.decodeData(encodedString);

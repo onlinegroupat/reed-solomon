@@ -2,19 +2,22 @@ package com.variocube.code.impl;
 
 import com.variocube.code.BinaryToHumanReadableCoder;
 
-public class DictionaryCode implements BinaryToHumanReadableCoder {
+public class DictionaryCoder implements BinaryToHumanReadableCoder {
 	
 	//                                               0123456789ABCDEF
 	public static final String DEFAULT_DICTIONARY = "123456ACDEHKLPRS";
+	public static final int DEFAULT_CODE_LENGTH = 8;
 	
 	private final String dictionary;
+	private final int codeLength;
 	
-	public DictionaryCode(String dictionary) {
+	public DictionaryCoder(String dictionary, int codeLength) {
 		this.dictionary = dictionary;
+		this.codeLength = codeLength;
 	}
 	
-	public DictionaryCode() {
-		this(DEFAULT_DICTIONARY);
+	public DictionaryCoder() {
+		this(DEFAULT_DICTIONARY, DEFAULT_CODE_LENGTH);
 	}
 	
 	@Override
@@ -39,6 +42,14 @@ public class DictionaryCode implements BinaryToHumanReadableCoder {
 			data[i] = (byte) (highByte << 4 | lowByte);
 		}
 		return data;
+	}
+
+	@Override
+	public String detectionPattern() {
+		String nonFormattedCode = String.format("(\\s[%s]{%d}\\s)", this.dictionary, this.codeLength);
+		int halfCode = this.codeLength / 2;
+		String formattedCode = String.format("(\\s[%s]{%d}[ \\.:][%s]{%d}\\s)", this.dictionary, halfCode, this.dictionary, halfCode);
+		return String.format("%s|%s", nonFormattedCode, formattedCode);
 	}
 	
 }

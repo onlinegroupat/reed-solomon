@@ -6,4 +6,6 @@ public interface BinaryToHumanReadableCoder {
 	
 	byte[] decodeData(String input);
 	
+	String detectionPattern();
+	
 }
