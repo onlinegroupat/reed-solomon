@@ -20,8 +20,6 @@ public class ReedSolomonParityCoder {
 	/**
 	 * Generates a new coder
 	 * 
-	 * @param dictionary
-	 * @param errorChar
 	 * @param numberOfShards
 	 * @param numberOfParity
 	 * @param shardLength

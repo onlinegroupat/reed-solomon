@@ -41,8 +41,8 @@ public class VCPostboxCoder {
 	/**
 	 * Generate a random code which contains some parity to check and fix broken codes
 	 * 
-	 * @return
-	 * @throws ParityCoderException
+	 * @return The generated random code as String
+	 * @throws ParityCoderException when parity coding failed
 	 */
 	public String generateRandomCode() throws ParityCoderException {
 		byte[] byteCode = this.parityCoder.generateRandomCode();
@@ -52,9 +52,9 @@ public class VCPostboxCoder {
 	/**
 	 * Check if a supplied code contains valid parity and thus can be assumed to be correct
 	 * 
-	 * @param code
-	 * @return
-	 * @throws ParityCoderException
+	 * @param code code to be checked
+	 * @return if the code contains valid parity
+	 * @throws ParityCoderException when parity could not be verified
 	 */
 	public boolean isValidCode(String code) throws ParityCoderException {
 		byte[] byteCode = this.binaryCoder.decodeData(code);
@@ -64,9 +64,9 @@ public class VCPostboxCoder {
 	/**
 	 * Computes all reconstructed codes
 	 * 
-	 * @param code
-	 * @return
-	 * @throws ParityCoderException
+	 * @param code a potentially broken code
+	 * @return all possible options to reconstruct the code
+	 * @throws ParityCoderException when unexpected errors occur in the ParityCoder
 	 */
 	public String[] reconstructionCandidates(String code) throws ParityCoderException {
 		if(this.isValidCode(code)) {

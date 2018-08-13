@@ -5,7 +5,7 @@ public interface ParityCoder {
 	/**
 	 * Adds parity data to the passed in byte[] according to the configured this.numberOfShards, this.numberOfParity and this.shardLength 
 	 *  
-	 * @param bytes the byte[] over which to operate
+	 * @param data the byte[] over which to operate
 	 * @throws ParityCoderException 
 	 */
 	void encodeParity(byte[] data) throws ParityCoderException;

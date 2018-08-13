@@ -17,7 +17,7 @@ public class RandomReedSolomonParityCoder extends ReedSolomonParityCoder impleme
 	 * Generates a random code and adds parity using the ReedSolomon parity algorithm
 	 * 
 	 * @return a random code with parity in the last this.numberOfParity * this.shardLength bytes
-	 * @throws ParityCoderException 
+	 * @throws ParityCoderException if the super ParityCoder was not able to encode the random byte array
 	 */
 	@Override
 	public byte[] generateRandomCode() throws ParityCoderException {

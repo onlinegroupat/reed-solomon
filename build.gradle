@@ -1,4 +1,24 @@
-apply plugin: 'java'
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+}
+
+group 'com.variocube'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
 
 repositories {
     mavenCentral()
@@ -6,4 +26,23 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+publishing {
+    repositories {
+        maven {
+            url "s3://og-repository/maven"
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar            
+        }
+    }
 }
