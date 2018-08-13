@@ -1,7 +1,6 @@
 package com.variocube.code.impl;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -47,10 +46,22 @@ public class RandomReedSolomonParityTest {
 		byteCodeRandom[3] = 7;
 		assertFalse(coder.isParityCorrect(byteCodeRandom));
 		
-		coder.decodeMissing(byteCodeRandom);
-		for(int i=0; i<6; i++) {
-			assertEquals(byteCodeWithZeros[i], byteCodeRandom[i]);
+		int matching = 0;
+		byte[][] candidates = coder.decodeMissing(byteCodeRandom);
+		for(int i=0; i<candidates.length; i++) {
+			byte[] candiate = candidates[i];
+			boolean mismatch = false;
+			for(int j=0; j<6; j++) {
+				if(candiate[j] != byteCodeWithZeros[j]) {
+					mismatch = true;
+					break;
+				}
+			}
+			if(!mismatch) {
+				matching++;
+			}
 		}
+		assertTrue("No decoded candidate matches our code", matching > 0);
 	}
 	
 }

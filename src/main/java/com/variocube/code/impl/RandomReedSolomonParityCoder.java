@@ -2,10 +2,10 @@ package com.variocube.code.impl;
 
 import java.security.SecureRandom;
 
-import com.variocube.code.ParitiyCoder;
+import com.variocube.code.ParityCoder;
 import com.variocube.code.ParityCoderException;
 
-public class RandomReedSolomonParityCoder extends ReedSolomonParityCoder implements ParitiyCoder {
+public class RandomReedSolomonParityCoder extends ReedSolomonParityCoder implements ParityCoder {
 
 	private static SecureRandom random = new SecureRandom();
 	
@@ -30,5 +30,5 @@ public class RandomReedSolomonParityCoder extends ReedSolomonParityCoder impleme
 		this.encodeParity(code);
 		return code;
 	}
-	
+
 }

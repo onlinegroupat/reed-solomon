@@ -99,5 +99,6 @@ public class SampleDecoder {
         OutputStream out = new FileOutputStream(decodedFile);
         out.write(allBytes, BYTES_IN_INT, fileSize);
         System.out.println("Wrote " + decodedFile);
+        out.close();
     }
 }

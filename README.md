@@ -1,4 +1,16 @@
-# JavaReedSolomon
+# Reed-Solomon Parity Encoding
+
+This project can generate random postbox codes which are Reed-Solomon
+parity encoded to contain extra redundancy. The library can verify and
+restore codes with flipped characters. If the broken partition is unknown
+then a number of valid restore guesses is made.
+
+ * [Reed-Solomon Error Correction](https://en.wikipedia.org/wiki/Reed–Solomon_error_correction)
+ * [Blackblaze Background Video](https://www.youtube.com/watch?v=jgO09opx56o)
+ * [Comparision Hamming vs. Reed-Solomon](https://www.ijraset.com/fileserve.php?FID=3620)
+ * [Introduction to ECC](http://circuit.ucsd.edu/~yhk/ece154c-spr17/pdfs/ErrorCorrectionI.pdf)
+
+# Original README.md from Blackblaze
 
 This is a simple and efficient Reed-Solomon implementation in Java,
 which was originally built at [Backblaze](https://www.backblaze.com).

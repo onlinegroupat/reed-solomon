@@ -1,6 +1,6 @@
 package com.variocube.code;
 
-public interface ParitiyCoder {
+public interface ParityCoder {
 
 	/**
 	 * Adds parity data to the passed in byte[] according to the configured this.numberOfShards, this.numberOfParity and this.shardLength 
@@ -28,6 +28,17 @@ public interface ParitiyCoder {
 	 * @throws ParityCoderException
 	 */
 	byte[][] decodeMissing(byte[] data) throws ParityCoderException;
+	
+	/**
+	 * Given an input data block which has one defective shard reconstruct
+	 * the original code.
+	 * 
+	 * @param data
+	 * @param defectiveShard
+	 * @return
+	 * @throws ParityCoderException
+	 */
+	byte[] decodeMissing(byte[] data, int defectiveShard) throws ParityCoderException;
 	
 	/**
 	 * Generates a random code and adds parity using the ReedSolomon parity algorithm

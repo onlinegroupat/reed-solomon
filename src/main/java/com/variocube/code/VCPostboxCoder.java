@@ -17,9 +17,9 @@ import com.variocube.code.impl.RandomReedSolomonParityCoder;
 public class VCPostboxCoder {
 	
 	private final BinaryToHumanReadableCoder binaryCoder;
-	private final ParitiyCoder parityCoder;
+	private final ParityCoder parityCoder;
 	
-	public VCPostboxCoder(BinaryToHumanReadableCoder binaryToHumanReadableCoder, ParitiyCoder parityCoder) {
+	public VCPostboxCoder(BinaryToHumanReadableCoder binaryToHumanReadableCoder, ParityCoder parityCoder) {
 		this.binaryCoder = binaryToHumanReadableCoder;
 		this.parityCoder = parityCoder;
 	}

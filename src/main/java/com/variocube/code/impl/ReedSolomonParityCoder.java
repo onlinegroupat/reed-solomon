@@ -45,6 +45,13 @@ public class ReedSolomonParityCoder {
 	}
 	
 	/**
+	 * @return the number of total blocks this code is made of
+	 */
+	public int totalBlocks() {
+		return this.numberOfShards + this.numberOfParity;
+	}
+	
+	/**
 	 * @return the number of bytes which can be encoded
 	 */
 	public int dataLength() {
@@ -83,6 +90,20 @@ public class ReedSolomonParityCoder {
 		return sum;
 	}
 	
+	/* (non-Javdoc)
+	 * @see com.variocube.code.impl.ParityCoder#decodeMissing(byte[], int) 
+	 */
+	public byte[] decodeMissing(byte[] data, int defectiveShard) throws ParityCoderException {
+		if(this.isParityCorrect(data)) {
+			return  data; // nothing to do
+		}
+		boolean[] present = this.generatePresentArray(this.numberOfShards + this.numberOfParity, defectiveShard);
+		byte[][] shards = this.arrayToMatrix(data);
+		this.codec.decodeMissing(shards, present, 0, this.shardLength);
+		this.copyMatrixToArray(shards, data);
+		return data;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.variocube.code.impl.ParitiyCoder#decodeMissing(byte[])
 	 */	
@@ -90,14 +111,11 @@ public class ReedSolomonParityCoder {
 		if(this.isParityCorrect(data)) {
 			return new byte[][] { data }; // nothing to do
 		}
-		int totalBlocks = this.numberOfShards + this.numberOfParity;
 		
-		byte[][] candidates = new byte[totalBlocks][data.length];
-		for(int i=0;i<totalBlocks; i++) {
-			boolean[] present = this.generatePresentArray(totalBlocks, i);
-			byte[][] shards = this.arrayToMatrix(data);
-			this.codec.decodeMissing(shards, present, 0, this.shardLength);
-			this.copyMatrixToArray(shards, candidates[i]);
+		byte[][] candidates = new byte[this.totalBlocks()][data.length];
+		for(int i=0;i<this.totalBlocks(); i++) {
+			System.arraycopy(data, 0, candidates[i], 0, data.length);
+			this.decodeMissing(candidates[i], i);
 		}
 		return candidates;
 	}
