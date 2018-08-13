@@ -24,12 +24,16 @@ public class VCPostboxCoder {
 		this.parityCoder = parityCoder;
 	}
 	
-	public static VCPostboxCoder createReedSolomonAndDicitonary() {
-		return new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder());
+	public static VCPostboxCoder createEightDigitCoder() {
+		return new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 1));
+	}
+	
+	public static VCPostboxCoder createSixteenDigitCoder() {
+		return new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 2));
 	}
 	
 	public static VCPostboxCoder createDefault() {
-		return createReedSolomonAndDicitonary();
+		return createEightDigitCoder();
 	}
 	
 	/**

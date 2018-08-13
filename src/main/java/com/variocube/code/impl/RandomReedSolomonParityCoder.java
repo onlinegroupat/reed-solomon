@@ -13,10 +13,6 @@ public class RandomReedSolomonParityCoder extends ReedSolomonParityCoder impleme
 		super(numberOfShards, numberOfParity, shardLength);
 	}
 	
-	public RandomReedSolomonParityCoder() {
-		this(DEFAULT_NUMBER_OF_SHARDS, DEFAULT_PARITY, DEFAULT_SHARD_LENGTH);
-	}
-	
 	/**
 	 * Generates a random code and adds parity using the ReedSolomon parity algorithm
 	 * 

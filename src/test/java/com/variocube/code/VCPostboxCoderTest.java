@@ -13,7 +13,7 @@ public class VCPostboxCoderTest {
 	
 	@Test
 	public void testRandomCodeGeneration() throws ParityCoderException {
-		VCPostboxCoder coder = VCPostboxCoder.createDefault();
+		VCPostboxCoder coder = VCPostboxCoder.createSixteenDigitCoder();
 		String random = coder.generateRandomCode();
 		assertEquals(16, random.length());
 	}
@@ -22,7 +22,7 @@ public class VCPostboxCoderTest {
 	public void testCodeValidation() throws ParityCoderException {
 		String validCode = "ADKPPL5DP333AAPC";
 		String invalidCode = "ADKP1L5DP333AAPC";
-		VCPostboxCoder coder = VCPostboxCoder.createDefault();
+		VCPostboxCoder coder = VCPostboxCoder.createSixteenDigitCoder();
 		assertTrue(coder.isValidCode(validCode));
 		assertFalse(coder.isValidCode(invalidCode));
 	}
@@ -38,7 +38,7 @@ public class VCPostboxCoderTest {
 	public void testInvalidCodeReconstruction() throws ParityCoderException {
 		String validCode = "ADKPPL5DP333AAPC";
 		String invalidCode = "ADKP1L5DP333AAPC";
-		VCPostboxCoder coder = VCPostboxCoder.createDefault();
+		VCPostboxCoder coder = VCPostboxCoder.createSixteenDigitCoder();
 		String[] candidates = coder.reconstructionCandidates(invalidCode);
 		int matching = 0;
 		for(String c : candidates) {
@@ -57,7 +57,7 @@ public class VCPostboxCoderTest {
 		String validCode = "25KDPKCC";
 		String invalidCode = "26KDPKCC";
 		
-		VCPostboxCoder coder = new VCPostboxCoder(new DictionaryCode(), new RandomReedSolomonParityCoder(3, 1, 1));
+		VCPostboxCoder coder = VCPostboxCoder.createEightDigitCoder();
 		String[] candidates = coder.reconstructionCandidates(invalidCode);
 		int matching = 0;
 		for(String c : candidates) {

@@ -11,10 +11,6 @@ import com.variocube.code.ParityCoderException;
  */
 public class ReedSolomonParityCoder {
 	
-	public static final int DEFAULT_NUMBER_OF_SHARDS = 3;
-	public static final int DEFAULT_PARITY = 1;
-	public static final int DEFAULT_SHARD_LENGTH = 2;
-	
 	private final int numberOfShards;
 	private final int numberOfParity;
 	private final int shardLength;
@@ -35,13 +31,6 @@ public class ReedSolomonParityCoder {
 		this.numberOfParity = numberOfParity;
 		this.shardLength = shardLength;
 		this.codec = ReedSolomon.create(this.numberOfShards, this.numberOfParity);
-	}
-	
-	/**
-	 * Generates a new coder with settings for short codes 
-	 */
-	public ReedSolomonParityCoder() {
-		this(DEFAULT_NUMBER_OF_SHARDS, DEFAULT_PARITY, DEFAULT_SHARD_LENGTH);
 	}
 	
 	/**

@@ -19,7 +19,8 @@ public class RandomReedSolomonParityTest {
 			{ -46, 34 },
 			{ 127, 19 } 
 		};
-		RandomReedSolomonParityCoder coder = new RandomReedSolomonParityCoder();
+		
+		RandomReedSolomonParityCoder coder = new RandomReedSolomonParityCoder(3, 1, 2);
 		byte[][] matrix = coder.arrayToMatrix(byteCode);
 		assertArrayEquals(expectedMatrix, matrix);
 		byte[] decodedByteArray = new byte[byteCode.length];
@@ -30,7 +31,7 @@ public class RandomReedSolomonParityTest {
 	public void testEncodeParity() throws ParityCoderException {
 		byte[] byteCodeRandom = new byte[] { 104, -67, -36, 72, -46, 34, 127, 19 };
 		byte[] byteCodeWithZeros = new byte[] { 104, -67, -36, 72, -46, 34, 0, 0 };
-		RandomReedSolomonParityCoder coder = new RandomReedSolomonParityCoder();
+		RandomReedSolomonParityCoder coder = new RandomReedSolomonParityCoder(3, 1, 2);
 		coder.encodeParity(byteCodeRandom);
 		coder.encodeParity(byteCodeWithZeros);
 		assertArrayEquals(byteCodeRandom, byteCodeWithZeros);
